@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Star, Play, Users, Clock, Award, CheckCircle, ArrowRight, BookOpen, Target, Zap } from "lucide-react"
+import { Star, Play, Users, Clock, Award, CheckCircle, ArrowRight, BookOpen, Target, Zap, Settings } from "lucide-react"
+import Link from "next/link"
 
 export default function Component() {
   return (
@@ -28,6 +29,15 @@ export default function Component() {
             <a href="#depoimentos" className="text-gray-300 hover:text-white transition-colors">
               Depoimentos
             </a>
+            <Link href="/admin">
+              <Button
+                variant="outline"
+                className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white bg-transparent"
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Admin
+              </Button>
+            </Link>
             <Button
               variant="outline"
               className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white bg-transparent"
