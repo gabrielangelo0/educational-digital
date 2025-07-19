@@ -218,97 +218,114 @@ export default function AdminPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
       {/* Header */}
-      <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+      <header className="border-b border-gray-700 bg-gray-900/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+            <Link href="/" className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
               <ArrowLeft className="w-5 h-5" />
-              Voltar
+              <span className="font-medium">Voltar</span>
             </Link>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Admin - Gerenciar Cursos</span>
+              <span className="text-xl font-bold text-white">Admin - Gerenciar Cursos</span>
             </div>
           </div>
 
           <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium">
                 <Plus className="w-4 h-4 mr-2" />
                 Novo Curso
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="bg-gray-900 border-gray-600 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>Criar Novo Curso</DialogTitle>
-                <DialogDescription className="text-gray-400">Preencha as informações do novo curso</DialogDescription>
+                <DialogTitle className="text-xl font-bold text-white">Criar Novo Curso</DialogTitle>
+                <DialogDescription className="text-gray-300">Preencha as informações do novo curso</DialogDescription>
               </DialogHeader>
 
-              <div className="grid gap-4 py-4">
+              <div className="grid gap-6 py-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="title">Título *</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="title" className="text-sm font-medium text-gray-200">
+                      Título *
+                    </Label>
                     <Input
                       id="title"
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="Nome do curso"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="instructor">Instrutor</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="instructor" className="text-sm font-medium text-gray-200">
+                      Instrutor
+                    </Label>
                     <Input
                       id="instructor"
                       value={formData.instructor}
                       onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="Nome do instrutor"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="description">Descrição *</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="description" className="text-sm font-medium text-gray-200">
+                    Descrição *
+                  </Label>
                   <Textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="bg-gray-800 border-gray-600"
+                    className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500 min-h-[80px]"
+                    placeholder="Descrição detalhada do curso"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="category">Categoria *</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="category" className="text-sm font-medium text-gray-200">
+                      Categoria *
+                    </Label>
                     <Select
                       value={formData.category}
                       onValueChange={(value) => setFormData({ ...formData, category: value })}
                     >
-                      <SelectTrigger className="bg-gray-800 border-gray-600">
-                        <SelectValue placeholder="Selecione uma categoria" />
+                      <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
+                        <SelectValue placeholder="Selecione uma categoria" className="text-gray-400" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-800 border-gray-600">
                         {categories.map((cat) => (
-                          <SelectItem key={cat} value={cat}>
+                          <SelectItem key={cat} value={cat} className="text-white hover:bg-gray-700 focus:bg-gray-700">
                             {cat}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
-                  <div>
-                    <Label htmlFor="level">Nível</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="level" className="text-sm font-medium text-gray-200">
+                      Nível
+                    </Label>
                     <Select
                       value={formData.level}
                       onValueChange={(value) => setFormData({ ...formData, level: value })}
                     >
-                      <SelectTrigger className="bg-gray-800 border-gray-600">
-                        <SelectValue placeholder="Selecione o nível" />
+                      <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
+                        <SelectValue placeholder="Selecione o nível" className="text-gray-400" />
                       </SelectTrigger>
                       <SelectContent className="bg-gray-800 border-gray-600">
                         {levels.map((level) => (
-                          <SelectItem key={level} value={level}>
+                          <SelectItem
+                            key={level}
+                            value={level}
+                            className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                          >
                             {level}
                           </SelectItem>
                         ))}
@@ -318,51 +335,64 @@ export default function AdminPage() {
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <Label htmlFor="price">Preço (R$)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="price" className="text-sm font-medium text-gray-200">
+                      Preço (R$)
+                    </Label>
                     <Input
                       id="price"
                       type="number"
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="497"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="originalPrice">Preço Original (R$)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="originalPrice" className="text-sm font-medium text-gray-200">
+                      Preço Original (R$)
+                    </Label>
                     <Input
                       id="originalPrice"
                       type="number"
                       value={formData.originalPrice}
                       onChange={(e) => setFormData({ ...formData, originalPrice: Number(e.target.value) })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="997"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="duration">Duração</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="duration" className="text-sm font-medium text-gray-200">
+                      Duração
+                    </Label>
                     <Input
                       id="duration"
-                      placeholder="ex: 120h"
+                      placeholder="120h"
                       value={formData.duration}
                       onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="students">Número de Alunos</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="students" className="text-sm font-medium text-gray-200">
+                      Número de Alunos
+                    </Label>
                     <Input
                       id="students"
                       type="number"
                       value={formData.students}
                       onChange={(e) => setFormData({ ...formData, students: Number(e.target.value) })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="2500"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="rating">Avaliação (1-5)</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="rating" className="text-sm font-medium text-gray-200">
+                      Avaliação (1-5)
+                    </Label>
                     <Input
                       id="rating"
                       type="number"
@@ -371,23 +401,30 @@ export default function AdminPage() {
                       step="0.1"
                       value={formData.rating}
                       onChange={(e) => setFormData({ ...formData, rating: Number(e.target.value) })}
-                      className="bg-gray-800 border-gray-600"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
+                      placeholder="4.9"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="image">Cor do Card</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="image" className="text-sm font-medium text-gray-200">
+                    Cor do Card
+                  </Label>
                   <Select value={formData.image} onValueChange={(value) => setFormData({ ...formData, image: value })}>
-                    <SelectTrigger className="bg-gray-800 border-gray-600">
+                    <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 border-gray-600">
                       {imageOptions.map((option) => (
-                        <SelectItem key={option} value={option}>
+                        <SelectItem
+                          key={option}
+                          value={option}
+                          className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                        >
                           <div className="flex items-center gap-2">
                             <div className={`w-4 h-4 rounded bg-gradient-to-r ${getImageGradient(option)}`}></div>
-                            {option}
+                            <span className="capitalize">{option.replace("-", " ")}</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -395,26 +432,33 @@ export default function AdminPage() {
                   </Select>
                 </div>
 
-                <div>
-                  <Label>Características do Curso</Label>
+                <div className="space-y-3">
+                  <Label className="text-sm font-medium text-gray-200">Características do Curso</Label>
                   {[0, 1, 2].map((index) => (
                     <Input
                       key={index}
                       placeholder={`Característica ${index + 1}`}
                       value={formData.features?.[index] || ""}
                       onChange={(e) => handleFeatureChange(index, e.target.value)}
-                      className="bg-gray-800 border-gray-600 mt-2"
+                      className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                     />
                   ))}
                 </div>
               </div>
 
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)} className="border-gray-600">
+              <DialogFooter className="gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsCreateDialogOpen(false)}
+                  className="border-gray-600 text-gray-200 hover:bg-gray-800 hover:text-white"
+                >
                   <X className="w-4 h-4 mr-2" />
                   Cancelar
                 </Button>
-                <Button onClick={handleCreate} className="bg-gradient-to-r from-purple-600 to-pink-600">
+                <Button
+                  onClick={handleCreate}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                >
                   <Save className="w-4 h-4 mr-2" />
                   Criar Curso
                 </Button>
@@ -427,15 +471,15 @@ export default function AdminPage() {
       {/* Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Gerenciar Cursos</h1>
-          <p className="text-gray-400">Total de {courses.length} cursos cadastrados</p>
+          <h1 className="text-3xl font-bold mb-2 text-white">Gerenciar Cursos</h1>
+          <p className="text-gray-300">Total de {courses.length} cursos cadastrados</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {courses.map((course) => (
             <Card
               key={course.id}
-              className="bg-gray-800/50 border-gray-700 hover:border-purple-500/50 transition-all duration-300"
+              className="bg-gray-800/70 border-gray-600 hover:border-purple-500/50 transition-all duration-300 backdrop-blur-sm"
             >
               <CardHeader className="pb-4">
                 <div
@@ -444,20 +488,22 @@ export default function AdminPage() {
                   <BookOpen className="w-12 h-12 text-white" />
                 </div>
                 <div className="flex items-center justify-between mb-2">
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">{course.category}</Badge>
-                  <Badge variant="outline" className="border-gray-600 text-gray-300">
+                  <Badge className="bg-purple-500/20 text-purple-200 border-purple-500/30 font-medium">
+                    {course.category}
+                  </Badge>
+                  <Badge variant="outline" className="border-gray-500 text-gray-200 bg-gray-700/50">
                     {course.level}
                   </Badge>
                 </div>
-                <CardTitle className="text-white text-lg">{course.title}</CardTitle>
-                <CardDescription className="text-gray-400">{course.description}</CardDescription>
+                <CardTitle className="text-white text-lg leading-tight">{course.title}</CardTitle>
+                <CardDescription className="text-gray-300">{course.description}</CardDescription>
               </CardHeader>
 
               <CardContent>
-                <div className="flex items-center gap-4 mb-4 text-sm text-gray-400">
-                  <span>{course.duration}</span>
-                  <span>{course.students} alunos</span>
-                  <span>⭐ {course.rating}</span>
+                <div className="flex items-center gap-4 mb-4 text-sm text-gray-300">
+                  <span className="font-medium">{course.duration}</span>
+                  <span className="font-medium">{course.students} alunos</span>
+                  <span className="font-medium">⭐ {course.rating}</span>
                 </div>
 
                 <div className="mb-4">
@@ -467,7 +513,7 @@ export default function AdminPage() {
                       <span className="text-lg text-gray-400 line-through">R$ {course.originalPrice}</span>
                     )}
                   </div>
-                  <p className="text-sm text-gray-400">Instrutor: {course.instructor}</p>
+                  <p className="text-sm text-gray-300 font-medium">Instrutor: {course.instructor}</p>
                 </div>
 
                 <div className="flex gap-2">
@@ -486,83 +532,101 @@ export default function AdminPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleEdit(course)}
-                        className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-700"
+                        className="flex-1 border-gray-500 text-gray-200 hover:bg-gray-700 hover:text-white hover:border-gray-400"
                       >
                         <Edit className="w-4 h-4 mr-2" />
                         Editar
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="bg-gray-900 border-gray-600 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
                       <DialogHeader>
-                        <DialogTitle>Editar Curso</DialogTitle>
-                        <DialogDescription className="text-gray-400">
+                        <DialogTitle className="text-xl font-bold text-white">Editar Curso</DialogTitle>
+                        <DialogDescription className="text-gray-300">
                           Atualize as informações do curso
                         </DialogDescription>
                       </DialogHeader>
 
-                      <div className="grid gap-4 py-4">
+                      <div className="grid gap-6 py-4">
                         <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="edit-title">Título *</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-title" className="text-sm font-medium text-gray-200">
+                              Título *
+                            </Label>
                             <Input
                               id="edit-title"
                               value={formData.title}
                               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
-                          <div>
-                            <Label htmlFor="edit-instructor">Instrutor</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-instructor" className="text-sm font-medium text-gray-200">
+                              Instrutor
+                            </Label>
                             <Input
                               id="edit-instructor"
                               value={formData.instructor}
                               onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
                         </div>
 
-                        <div>
-                          <Label htmlFor="edit-description">Descrição *</Label>
+                        <div className="space-y-2">
+                          <Label htmlFor="edit-description" className="text-sm font-medium text-gray-200">
+                            Descrição *
+                          </Label>
                           <Textarea
                             id="edit-description"
                             value={formData.description}
                             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                            className="bg-gray-800 border-gray-600"
+                            className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500 min-h-[80px]"
                           />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="edit-category">Categoria *</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-category" className="text-sm font-medium text-gray-200">
+                              Categoria *
+                            </Label>
                             <Select
                               value={formData.category}
                               onValueChange={(value) => setFormData({ ...formData, category: value })}
                             >
-                              <SelectTrigger className="bg-gray-800 border-gray-600">
+                              <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
                                 <SelectValue />
                               </SelectTrigger>
                               <SelectContent className="bg-gray-800 border-gray-600">
                                 {categories.map((cat) => (
-                                  <SelectItem key={cat} value={cat}>
+                                  <SelectItem
+                                    key={cat}
+                                    value={cat}
+                                    className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                                  >
                                     {cat}
                                   </SelectItem>
                                 ))}
                               </SelectContent>
                             </Select>
                           </div>
-                          <div>
-                            <Label htmlFor="edit-level">Nível</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-level" className="text-sm font-medium text-gray-200">
+                              Nível
+                            </Label>
                             <Select
                               value={formData.level}
                               onValueChange={(value) => setFormData({ ...formData, level: value })}
                             >
-                              <SelectTrigger className="bg-gray-800 border-gray-600">
+                              <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
                                 <SelectValue />
                               </SelectTrigger>
                               <SelectContent className="bg-gray-800 border-gray-600">
                                 {levels.map((level) => (
-                                  <SelectItem key={level} value={level}>
+                                  <SelectItem
+                                    key={level}
+                                    value={level}
+                                    className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                                  >
                                     {level}
                                   </SelectItem>
                                 ))}
@@ -572,50 +636,60 @@ export default function AdminPage() {
                         </div>
 
                         <div className="grid grid-cols-3 gap-4">
-                          <div>
-                            <Label htmlFor="edit-price">Preço (R$)</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-price" className="text-sm font-medium text-gray-200">
+                              Preço (R$)
+                            </Label>
                             <Input
                               id="edit-price"
                               type="number"
                               value={formData.price}
                               onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
-                          <div>
-                            <Label htmlFor="edit-originalPrice">Preço Original (R$)</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-originalPrice" className="text-sm font-medium text-gray-200">
+                              Preço Original (R$)
+                            </Label>
                             <Input
                               id="edit-originalPrice"
                               type="number"
                               value={formData.originalPrice}
                               onChange={(e) => setFormData({ ...formData, originalPrice: Number(e.target.value) })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
-                          <div>
-                            <Label htmlFor="edit-duration">Duração</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-duration" className="text-sm font-medium text-gray-200">
+                              Duração
+                            </Label>
                             <Input
                               id="edit-duration"
                               value={formData.duration}
                               onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="edit-students">Número de Alunos</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-students" className="text-sm font-medium text-gray-200">
+                              Número de Alunos
+                            </Label>
                             <Input
                               id="edit-students"
                               type="number"
                               value={formData.students}
                               onChange={(e) => setFormData({ ...formData, students: Number(e.target.value) })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
-                          <div>
-                            <Label htmlFor="edit-rating">Avaliação (1-5)</Label>
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-rating" className="text-sm font-medium text-gray-200">
+                              Avaliação (1-5)
+                            </Label>
                             <Input
                               id="edit-rating"
                               type="number"
@@ -624,28 +698,34 @@ export default function AdminPage() {
                               step="0.1"
                               value={formData.rating}
                               onChange={(e) => setFormData({ ...formData, rating: Number(e.target.value) })}
-                              className="bg-gray-800 border-gray-600"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           </div>
                         </div>
 
-                        <div>
-                          <Label htmlFor="edit-image">Cor do Card</Label>
+                        <div className="space-y-2">
+                          <Label htmlFor="edit-image" className="text-sm font-medium text-gray-200">
+                            Cor do Card
+                          </Label>
                           <Select
                             value={formData.image}
                             onValueChange={(value) => setFormData({ ...formData, image: value })}
                           >
-                            <SelectTrigger className="bg-gray-800 border-gray-600">
+                            <SelectTrigger className="bg-gray-800 border-gray-600 text-white focus:border-purple-500 focus:ring-purple-500">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent className="bg-gray-800 border-gray-600">
                               {imageOptions.map((option) => (
-                                <SelectItem key={option} value={option}>
+                                <SelectItem
+                                  key={option}
+                                  value={option}
+                                  className="text-white hover:bg-gray-700 focus:bg-gray-700"
+                                >
                                   <div className="flex items-center gap-2">
                                     <div
                                       className={`w-4 h-4 rounded bg-gradient-to-r ${getImageGradient(option)}`}
                                     ></div>
-                                    {option}
+                                    <span className="capitalize">{option.replace("-", " ")}</span>
                                   </div>
                                 </SelectItem>
                               ))}
@@ -653,21 +733,21 @@ export default function AdminPage() {
                           </Select>
                         </div>
 
-                        <div>
-                          <Label>Características do Curso</Label>
+                        <div className="space-y-3">
+                          <Label className="text-sm font-medium text-gray-200">Características do Curso</Label>
                           {[0, 1, 2].map((index) => (
                             <Input
                               key={index}
                               placeholder={`Característica ${index + 1}`}
                               value={formData.features?.[index] || ""}
                               onChange={(e) => handleFeatureChange(index, e.target.value)}
-                              className="bg-gray-800 border-gray-600 mt-2"
+                              className="bg-gray-800 border-gray-600 text-white placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-500"
                             />
                           ))}
                         </div>
                       </div>
 
-                      <DialogFooter>
+                      <DialogFooter className="gap-2">
                         <Button
                           variant="outline"
                           onClick={() => {
@@ -675,12 +755,15 @@ export default function AdminPage() {
                             setEditingCourse(null)
                             resetForm()
                           }}
-                          className="border-gray-600"
+                          className="border-gray-600 text-gray-200 hover:bg-gray-800 hover:text-white"
                         >
                           <X className="w-4 h-4 mr-2" />
                           Cancelar
                         </Button>
-                        <Button onClick={handleUpdate} className="bg-gradient-to-r from-purple-600 to-pink-600">
+                        <Button
+                          onClick={handleUpdate}
+                          className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                        >
                           <Save className="w-4 h-4 mr-2" />
                           Salvar Alterações
                         </Button>
@@ -693,26 +776,26 @@ export default function AdminPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-red-600 text-red-400 hover:bg-red-600 hover:text-white bg-transparent"
+                        className="border-red-500 text-red-400 hover:bg-red-600 hover:text-white hover:border-red-600 bg-transparent"
                       >
                         <Trash2 className="w-4 h-4 mr-2" />
                         Excluir
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="bg-gray-900 border-gray-700">
+                    <AlertDialogContent className="bg-gray-900 border-gray-600">
                       <AlertDialogHeader>
-                        <AlertDialogTitle className="text-white">Confirmar Exclusão</AlertDialogTitle>
-                        <AlertDialogDescription className="text-gray-400">
+                        <AlertDialogTitle className="text-white text-lg font-bold">Confirmar Exclusão</AlertDialogTitle>
+                        <AlertDialogDescription className="text-gray-300">
                           Tem certeza que deseja excluir o curso "{course.title}"? Esta ação não pode ser desfeita.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel className="border-gray-600 text-gray-300 hover:bg-gray-700">
+                      <AlertDialogFooter className="gap-2">
+                        <AlertDialogCancel className="border-gray-600 text-gray-200 hover:bg-gray-800 hover:text-white">
                           Cancelar
                         </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={() => handleDelete(course.id)}
-                          className="bg-red-600 hover:bg-red-700"
+                          className="bg-red-600 hover:bg-red-700 text-white"
                         >
                           Excluir
                         </AlertDialogAction>
@@ -727,12 +810,12 @@ export default function AdminPage() {
 
         {courses.length === 0 && (
           <div className="text-center py-12">
-            <BookOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-400 mb-2">Nenhum curso cadastrado</h3>
-            <p className="text-gray-500 mb-6">Comece criando seu primeiro curso</p>
+            <BookOpen className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-200 mb-2">Nenhum curso cadastrado</h3>
+            <p className="text-gray-400 mb-6">Comece criando seu primeiro curso</p>
             <Button
               onClick={() => setIsCreateDialogOpen(true)}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
             >
               <Plus className="w-4 h-4 mr-2" />
               Criar Primeiro Curso
